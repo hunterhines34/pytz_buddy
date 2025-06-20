@@ -179,6 +179,9 @@ Desktop.ini
 # Linux
 *~
 
+# Serena files
+.serena/
+
 # Temporary files
 *.tmp
 *.temp
