@@ -1,0 +1,4 @@
+requests==2.32.4
+pytz==2025.2
+geopy==2.4.1
+timezonefinder==6.5.9
