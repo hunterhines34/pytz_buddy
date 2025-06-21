@@ -6,9 +6,12 @@ A simple Python application that helps you find timezone information for any loc
 
 - 🔍 **Location Lookup**: Enter any location (city, state, country) and get its timezone
 - 🕐 **Time Conversion**: Automatically converts current time to major world timezones
+- ⏱️ **Relative Time Display**: Shows "X hours ahead/behind" for easy comparison
+- 🌍 **Timezone Shortcuts**: Quick access with shortcuts like 'nyc', 'london', 'tokyo'
 - 📝 **Search History**: Keep track of recent searches and quickly repeat them
+- 🌅 **Day/Night Indicators**: Visual icons showing time of day for each timezone
 - 🆓 **Free APIs**: Uses only free services (OpenStreetMap Nominatim for geocoding)
-- 🎯 **Simple Interface**: Clean command-line interface that's easy to use
+- 🎯 **Enhanced Interface**: Clean, informative command-line interface
 
 ## Installation
 
@@ -50,6 +53,25 @@ The app will show:
 - Type `history` to see your recent searches (up to 10)
 - Type a number (e.g., `1`, `2`) to repeat a previous search
 - Recent searches are automatically saved when successful
+
+### Timezone Shortcuts
+
+For quick timezone lookups, you can use these shortcuts instead of searching for cities:
+
+| Shortcut | Timezone | Region |
+|----------|----------|---------|
+| `nyc`, `ny`, `east` | US/Eastern | New York, Eastern US |
+| `chicago`, `central` | US/Central | Chicago, Central US |
+| `denver`, `mountain` | US/Mountain | Denver, Mountain US |
+| `la`, `west`, `pacific` | US/Pacific | Los Angeles, Pacific US |
+| `london`, `uk` | Europe/London | London, UK |
+| `paris` | Europe/Paris | Paris, France |
+| `tokyo`, `japan` | Asia/Tokyo | Tokyo, Japan |
+| `beijing`, `china` | Asia/Shanghai | Beijing, China |
+| `sydney`, `australia` | Australia/Sydney | Sydney, Australia |
+| `utc`, `gmt` | UTC | Coordinated Universal Time |
+
+Example: Type `nyc` instead of searching for "New York, NY"
 
 ## Example Output
 
