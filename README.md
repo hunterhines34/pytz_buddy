@@ -84,35 +84,151 @@ Example: Type `nyc` instead of searching for "New York, NY"
 
 ## Example Output
 
+**Enhanced Interface with New Features:**
+
 ```
 🌍 Welcome to PyTZ Buddy - Timezone Converter!
-Enter location: Duncan, Oklahoma
+Enter a location to see its timezone and conversions to major world timezones.
+Examples: 'Duncan, Oklahoma', 'Paris, France', 'Tokyo, Japan'
+Shortcuts: 'nyc', 'london', 'tokyo', 'chicago', 'la', 'sydney', etc.
 
-Looking up location: Duncan, Oklahoma
-Found: Duncan, Stephens County, Oklahoma, United States
-Timezone: America/Chicago
+📋 Available Commands:
+  • Enter any location name (city, state, country)
+  • Use timezone shortcuts (nyc, london, tokyo, etc.)
+  • 'history' - View your recent searches
+  • '1', '2', etc. - Repeat a search from history
+  • 'quit', 'exit', or 'q' - Exit the program
+  • Ctrl+C - Quick exit
 
-============================================================
-TIMEZONE INFORMATION
-============================================================
-Location: Duncan, Stephens County, Oklahoma, United States
-Coordinates: 34.5015, -97.9578
-Local Timezone: America/Chicago
+Enter location (or command): New York City, New York
 
-CURRENT TIME CONVERSIONS:
+Processing...
+Looking up location: New York City, New York
+Found: City of New York, New York, United States
+Timezone: America/New_York
+
+======================================================================
+🌍 TIMEZONE INFORMATION
+======================================================================
+📍 Location: City of New York, New York, United States
+📌 Coordinates: 40.7127, -74.0060
+🕐 Local Timezone: America/New_York
+
+⏰ CURRENT TIME CONVERSIONS:
+----------------------------------------------------------------------
+⭐ America/New_York     | 2025-06-21 10:15:30 EDT (-0400) 🌅
+                        | LOCAL TIME
+
+  US/Eastern           | 2025-06-21 10:15:30 EDT (-0400) 🌅
+                       | (same time)
+  US/Central           | 2025-06-21 09:15:30 CDT (-0500) 🌅
+                       | (1 hour behind)
+  US/Mountain          | 2025-06-21 08:15:30 MDT (-0600) 🌅
+                       | (2 hours behind)
+  US/Pacific           | 2025-06-21 07:15:30 PDT (-0700) 🌅
+                       | (3 hours behind)
+  Europe/London        | 2025-06-21 15:15:30 BST (+0100) ☀️
+                       | (5 hours ahead)
+  Europe/Paris         | 2025-06-21 16:15:30 CEST (+0200) ☀️
+                       | (6 hours ahead)
+  Asia/Tokyo           | 2025-06-21 23:15:30 JST (+0900) 🌙
+                       | (13 hours ahead)
+  Asia/Shanghai        | 2025-06-21 22:15:30 CST (+0800) 🌙
+                       | (12 hours ahead)
+  Australia/Sydney     | 2025-06-22 00:15:30 AEST (+1000) 🌙
+                       | (14 hours ahead)
+  UTC                  | 2025-06-21 14:15:30 UTC (+0000) ☀️
+                       | (4 hours ahead)
+======================================================================
+💡 Tip: You can use shortcuts like 'nyc', 'london', 'tokyo' for quick timezone lookups!
+======================================================================
+
 ------------------------------------------------------------
-★ America/Chicago      | 2025-06-20 15:30:45 CST (LOCAL)
+💡 Next: Enter another location, type 'history' for recent searches, or 'quit' to exit
+------------------------------------------------------------
 
-  US/Eastern            | 2025-06-20 16:30:45 EST
-  US/Mountain           | 2025-06-20 14:30:45 MST
-  US/Pacific            | 2025-06-20 13:30:45 PST
-  Europe/London         | 2025-06-20 21:30:45 GMT
-  Europe/Paris          | 2025-06-20 22:30:45 CET
-  Asia/Tokyo            | 2025-06-21 06:30:45 JST
-  Asia/Shanghai         | 2025-06-21 05:30:45 CST
-  Australia/Sydney      | 2025-06-21 07:30:45 AEDT
-  UTC                   | 2025-06-20 21:30:45 UTC
-============================================================
+Enter location (or command): Tokyo, Japan
+
+Processing...
+Looking up location: Tokyo, Japan
+Found: 東京都, 日本
+Timezone: Asia/Tokyo
+
+======================================================================
+🌍 TIMEZONE INFORMATION
+======================================================================
+📍 Location: 東京都, 日本
+📌 Coordinates: 35.6769, 139.7639
+🕐 Local Timezone: Asia/Tokyo
+
+⏰ CURRENT TIME CONVERSIONS:
+----------------------------------------------------------------------
+⭐ Asia/Tokyo           | 2025-06-21 23:15:45 JST (+0900) 🌙
+                        | LOCAL TIME
+
+  US/Eastern           | 2025-06-21 10:15:45 EDT (-0400) 🌅
+                       | (13 hours behind)
+  US/Central           | 2025-06-21 09:15:45 CDT (-0500) 🌅
+                       | (14 hours behind)
+  US/Mountain          | 2025-06-21 08:15:45 MDT (-0600) 🌅
+                       | (15 hours behind)
+  US/Pacific           | 2025-06-21 07:15:45 PDT (-0700) 🌅
+                       | (16 hours behind)
+  Europe/London        | 2025-06-21 15:15:45 BST (+0100) ☀️
+                       | (8 hours behind)
+  Europe/Paris         | 2025-06-21 16:15:45 CEST (+0200) ☀️
+                       | (7 hours behind)
+  Asia/Shanghai        | 2025-06-21 22:15:45 CST (+0800) 🌙
+                       | (1 hour behind)
+  Australia/Sydney     | 2025-06-22 01:15:45 AEST (+1000) 🌙
+                       | (1 hour ahead)
+  UTC                  | 2025-06-21 14:15:45 UTC (+0000) ☀️
+                       | (9 hours behind)
+======================================================================
+💡 Tip: You can use shortcuts like 'nyc', 'london', 'tokyo' for quick timezone lookups!
+======================================================================
+
+------------------------------------------------------------
+💡 Next: Enter another location, type 'history' for recent searches, or 'quit' to exit
+------------------------------------------------------------
+
+Enter location (or command): history
+
+📝 Recent Searches:
+----------------------------------------
+1. New York City, New York
+2. Tokyo, Japan
+
+💡 Tip: Type a number (1-2) to repeat that search
+Or enter a new location to search.
+
+Enter location (or command): 1
+🔄 Repeating search for: New York City, New York
+
+Processing...
+Looking up location: New York City, New York
+Found: City of New York, New York, United States
+Timezone: America/New_York
+
+======================================================================
+🌍 TIMEZONE INFORMATION
+======================================================================
+📍 Location: City of New York, New York, United States
+📌 Coordinates: 40.7127, -74.0060
+🕐 Local Timezone: America/New_York
+
+⏰ CURRENT TIME CONVERSIONS:
+----------------------------------------------------------------------
+⭐ America/New_York     | 2025-06-21 10:16:12 EDT (-0400) 🌅
+                        | LOCAL TIME
+
+  US/Eastern           | 2025-06-21 10:16:12 EDT (-0400) 🌅
+                       | (same time)
+  [... other timezones shown ...]
+======================================================================
+
+Enter location (or command): quit
+Thanks for using PyTZ Buddy! 🌍
 ```
 
 ## Dependencies
