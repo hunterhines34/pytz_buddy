@@ -4,10 +4,21 @@ A simple Python application that helps you find timezone information for any loc
 
 ## Features
 
+### Core Features
 - 🔍 **Location Lookup**: Enter any location (city, state, country) and get its timezone
 - 🕐 **Time Conversion**: Automatically converts current time to major world timezones
+- ⏰ **Specific Time Conversion**: Convert any specific time (not just current time)
 - ⏱️ **Relative Time Display**: Shows "X hours ahead/behind" for easy comparison
 - 🌍 **Timezone Shortcuts**: Quick access with shortcuts like 'nyc', 'london', 'tokyo'
+
+### Advanced Features
+- 🗓️ **Meeting Time Scheduler**: Find optimal meeting times across multiple timezones
+- 🕐 **Business Hours Overlap**: Analyze working hours overlap between locations
+- 📊 **Enhanced Search**: Smart suggestions when location isn't found
+- 💾 **Export Results**: Save timezone conversions to TXT or JSON files
+- ⚙️ **User Configuration**: Customizable business hours and timezone preferences
+
+### User Experience
 - 📝 **Search History**: Keep track of recent searches and quickly repeat them
 - 🌅 **Day/Night Indicators**: Visual icons showing time of day for each timezone
 - 💾 **Persistent History**: Search history saved across sessions with location caching
@@ -47,7 +58,8 @@ Run the application:
 python main.py
 ```
 
-Then enter any location when prompted:
+### Basic Location Lookup
+Enter any location when prompted:
 - `Duncan, Oklahoma`
 - `Paris, France`
 - `Tokyo, Japan`
@@ -58,6 +70,39 @@ The app will show:
 - Local timezone information
 - Current time in that timezone
 - Converted times for major world timezones
+
+### Advanced Commands
+
+#### Time Conversion
+Convert specific times across timezones:
+```bash
+convert 14:30 EST              # Convert 2:30 PM EST to all timezones
+convert 9:00 AM PST 2025-07-04 # Convert with specific date
+convert 15:45 UTC              # Convert UTC time
+```
+
+#### Meeting Planning
+Find optimal meeting times for multiple locations:
+```bash
+meeting nyc london tokyo       # 3-way meeting planning
+meeting New York London        # 2-way meeting planning
+meeting EST PST CST            # Using timezone shortcuts
+```
+
+#### Business Hours Analysis
+Analyze working hours overlap between locations:
+```bash
+overlap nyc london sydney      # Check business hours overlap
+overlap EST PST                # US coast overlap analysis
+overlap tokyo beijing singapore # Asia-Pacific overlap
+```
+
+#### Export & Configuration
+```bash
+export txt                     # Export last result as text file
+export json                    # Export last result as JSON file
+help                          # Show detailed command help
+```
 
 ### History Commands
 
@@ -94,6 +139,36 @@ PyTZ Buddy includes intelligent caching to improve performance and user experien
 - **Automatic Cleanup**: Cache automatically manages size and removes expired entries
 
 The cache is stored in `.pytz_cache/` directory and is automatically ignored by Git.
+
+### Advanced Features
+
+#### Meeting Time Scheduler
+Perfect for coordinating across global teams:
+- Finds optimal meeting times during business hours (9 AM - 5 PM local time)
+- Supports multiple locations simultaneously
+- Shows up to 7 days of meeting opportunities
+- Visual indicators for time of day at each location
+
+#### Business Hours Overlap Analysis
+Analyze working hours compatibility:
+- Calculate overlapping business hours between locations
+- Customizable business hours (default 9 AM - 5 PM)
+- Recommendations based on overlap duration
+- Perfect for planning collaboration strategies
+
+#### Export & Integration
+Save and share your timezone analysis:
+- Export results in TXT or JSON format
+- Timestamped files for record keeping
+- JSON format perfect for integration with other tools
+- Automatic filename generation with timestamps
+
+#### Enhanced Search
+Smart location suggestions when searches fail:
+- Suggests similar locations for typos
+- Provides specific formatting examples
+- Recommends timezone shortcuts
+- Contextual help based on input patterns
 
 ## Example Output
 

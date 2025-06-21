@@ -138,3 +138,43 @@ class CacheManager:
             return round(total_size / (1024 * 1024), 2)
         except OSError:
             return 0
+    
+    def get_user_config(self):
+            """Get user configuration settings"""
+            config_file = os.path.join(self.cache_dir, "user_config.json")
+            default_config = {
+                "business_hours": {
+                    "start": 9,
+                    "end": 17
+                },
+                "preferred_timezones": [
+                    "US/Eastern", "US/Central", "US/Mountain", "US/Pacific",
+                    "Europe/London", "Europe/Paris", "Asia/Tokyo", "UTC"
+                ],
+                "date_format": "%Y-%m-%d",
+                "time_format": "24h",  # "24h" or "12h"
+                "export_format": "txt"
+            }
+            
+            if not os.path.exists(config_file):
+                self._write_json(config_file, default_config)
+                return default_config
+            
+            config = self._read_json(config_file)
+            # Merge with defaults for any missing keys
+            for key, value in default_config.items():
+                if key not in config:
+                    config[key] = value
+            
+            return config
+        
+    def update_user_config(self, key, value):
+            """Update a specific configuration setting"""
+            config_file = os.path.join(self.cache_dir, "user_config.json")
+            config = self.get_user_config()
+            
+            if key in config:
+                config[key] = value
+                return self._write_json(config_file, config)
+            return False
+    
