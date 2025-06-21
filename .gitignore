@@ -185,3 +185,6 @@ Desktop.ini
 # Temporary files
 *.tmp
 *.temp
+
+# PyTZ Buddy cache directory
+.pytz_cache/

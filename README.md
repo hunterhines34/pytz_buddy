@@ -10,6 +10,8 @@ A simple Python application that helps you find timezone information for any loc
 - 🌍 **Timezone Shortcuts**: Quick access with shortcuts like 'nyc', 'london', 'tokyo'
 - 📝 **Search History**: Keep track of recent searches and quickly repeat them
 - 🌅 **Day/Night Indicators**: Visual icons showing time of day for each timezone
+- 💾 **Persistent History**: Search history saved across sessions with location caching
+- ⚡ **Smart Caching**: Geocoding results cached for faster repeat searches
 - 🆓 **Free APIs**: Uses only free services (OpenStreetMap Nominatim for geocoding)
 - 🎯 **Enhanced Interface**: Clean, informative command-line interface
 
@@ -81,6 +83,17 @@ For quick timezone lookups, you can use these shortcuts instead of searching for
 | `utc`, `gmt` | UTC | Coordinated Universal Time |
 
 Example: Type `nyc` instead of searching for "New York, NY"
+
+### Smart Caching & Performance
+
+PyTZ Buddy includes intelligent caching to improve performance and user experience:
+
+- **Persistent History**: Your search history is automatically saved and restored between sessions
+- **Location Caching**: Geocoding results are cached for 30 days to speed up repeat searches
+- **Cache Indicators**: See `📋 Found in cache:` when using cached location data
+- **Automatic Cleanup**: Cache automatically manages size and removes expired entries
+
+The cache is stored in `.pytz_cache/` directory and is automatically ignored by Git.
 
 ## Example Output
 

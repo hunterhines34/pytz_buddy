@@ -12,9 +12,16 @@ from timezonefinder import TimezoneFinder
 import requests
 
 class TimezoneConverter:
-    def __init__(self):
+    def __init__(self, cache_manager=None):
             self.geolocator = Nominatim(user_agent="pytz_buddy")
             self.tf = TimezoneFinder()
+            
+            # Import and initialize cache manager
+            if cache_manager is None:
+                from cache_manager import CacheManager
+                self.cache_manager = CacheManager()
+            else:
+                self.cache_manager = cache_manager
             
             # Major timezones to display
             self.major_timezones = [
@@ -54,6 +61,7 @@ class TimezoneConverter:
                 'utc': 'UTC',
                 'gmt': 'UTC'
             }
+
     
     def resolve_timezone_shortcut(self, input_tz):
         """Resolve timezone shortcuts to full timezone names"""
@@ -92,20 +100,31 @@ class TimezoneConverter:
             'conversions': conversions
         }    
     def get_location_info(self, location_name):
-        """Get coordinates and address for a location"""
+        """Get coordinates and address for a location with caching"""
+        # Try to get from cache first
+        cached_result = self.cache_manager.get_cached_location(location_name)
+        if cached_result:
+            print(f"📋 Found in cache: {cached_result['address']}")
+            return cached_result
+        
+        # Not in cache, perform geocoding
         try:
             location = self.geolocator.geocode(location_name)
             if location:
-                return {
+                location_data = {
                     'address': location.address,
                     'latitude': location.latitude,
                     'longitude': location.longitude
                 }
+                # Cache the result for future use
+                self.cache_manager.cache_location(location_name, location_data)
+                return location_data
             else:
                 return None
         except Exception as e:
             print(f"Error geocoding location: {e}")
             return None
+
     
     def get_timezone_for_coordinates(self, lat, lng):
         """Get timezone for given coordinates"""
