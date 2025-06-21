@@ -183,137 +183,133 @@ Shortcuts: 'nyc', 'london', 'tokyo', 'chicago', 'la', 'sydney', etc.
 📋 Available Commands:
   • Enter any location name (city, state, country)
   • Use timezone shortcuts (nyc, london, tokyo, etc.)
+  • 'convert [time] [timezone]' - Convert specific time (e.g., 'convert 14:30 EST')
+  • 'meeting [location1] [location2] ...' - Find meeting times
+  • 'overlap [location1] [location2] ...' - Business hours overlap
   • 'history' - View your recent searches
+  • 'export [format]' - Export last result (txt/json)
+  • 'help' - Show detailed command help
   • '1', '2', etc. - Repeat a search from history
   • 'quit', 'exit', or 'q' - Exit the program
   • Ctrl+C - Quick exit
 
-Enter location (or command): New York City, New York
+Enter location (or command): convert 14:30 EST
 
-Processing...
-Looking up location: New York City, New York
-Found: City of New York, New York, United States
-Timezone: America/New_York
+🔄 Converting 14:30 from EST...
 
+⏰ TIME CONVERSION: 14:30 EST (today)
 ======================================================================
-🌍 TIMEZONE INFORMATION
-======================================================================
-📍 Location: City of New York, New York, United States
-📌 Coordinates: 40.7127, -74.0060
-🕐 Local Timezone: America/New_York
+⭐ US/Eastern           | 2025-06-21 14:30:00 EST (-0500) ☀️
+   ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ | SOURCE TIME
 
-⏰ CURRENT TIME CONVERSIONS:
-----------------------------------------------------------------------
-⭐ America/New_York     | 2025-06-21 10:15:30 EDT (-0400) 🌅
-                        | LOCAL TIME
-
-  US/Eastern           | 2025-06-21 10:15:30 EDT (-0400) 🌅
-                       | (same time)
-  US/Central           | 2025-06-21 09:15:30 CDT (-0500) 🌅
-                       | (1 hour behind)
-  US/Mountain          | 2025-06-21 08:15:30 MDT (-0600) 🌅
-                       | (2 hours behind)
-  US/Pacific           | 2025-06-21 07:15:30 PDT (-0700) 🌅
-                       | (3 hours behind)
-  Europe/London        | 2025-06-21 15:15:30 BST (+0100) ☀️
-                       | (5 hours ahead)
-  Europe/Paris         | 2025-06-21 16:15:30 CEST (+0200) ☀️
-                       | (6 hours ahead)
-  Asia/Tokyo           | 2025-06-21 23:15:30 JST (+0900) 🌙
-                       | (13 hours ahead)
-  Asia/Shanghai        | 2025-06-21 22:15:30 CST (+0800) 🌙
-                       | (12 hours ahead)
-  Australia/Sydney     | 2025-06-22 00:15:30 AEST (+1000) 🌙
-                       | (14 hours ahead)
-  UTC                  | 2025-06-21 14:15:30 UTC (+0000) ☀️
-                       | (4 hours ahead)
-======================================================================
-💡 Tip: You can use shortcuts like 'nyc', 'london', 'tokyo' for quick timezone lookups!
+  US/Central           | 2025-06-21 13:30:00 CST (-0600) ☀️
+  ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ | (1 hour behind)
+  US/Mountain          | 2025-06-21 12:30:00 MST (-0700) ☀️
+  ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ | (2 hours behind)
+  US/Pacific           | 2025-06-21 11:30:00 PST (-0800) 🌅
+  ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ | (3 hours behind)
+  Europe/London        | 2025-06-21 19:30:00 GMT (+0000) 🌆
+  ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ | (5 hours ahead)
+  Asia/Tokyo           | 2025-06-22 04:30:00 JST (+0900) 🌙
+  ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ | (14 hours ahead)
 ======================================================================
 
-------------------------------------------------------------
-💡 Next: Enter another location, type 'history' for recent searches, or 'quit' to exit
-------------------------------------------------------------
+Enter location (or command): meeting nyc london tokyo
 
-Enter location (or command): Tokyo, Japan
+🗓️ Finding meeting times for: nyc, london, tokyo
 
-Processing...
-Looking up location: Tokyo, Japan
-Found: 東京都, 日本
-Timezone: Asia/Tokyo
-
+🗓️ MEETING TIME SUGGESTIONS
 ======================================================================
-🌍 TIMEZONE INFORMATION
-======================================================================
-📍 Location: 東京都, 日本
-📌 Coordinates: 35.6769, 139.7639
-🕐 Local Timezone: Asia/Tokyo
+📍 Locations: nyc, london, tokyo
+⏰ Business Hours: 8:00 AM - 6:00 PM (local time)  
+🔍 Found 3 optimal meeting times:
 
-⏰ CURRENT TIME CONVERSIONS:
-----------------------------------------------------------------------
-⭐ Asia/Tokyo           | 2025-06-21 23:15:45 JST (+0900) 🌙
-                        | LOCAL TIME
+🕐 Option 1: Monday, 2025-06-23
+--------------------------------------------------
+  📍 nyc             | 08:00 EST 🌅
+  📍 london          | 13:00 GMT ☀️  
+  📍 tokyo           | 22:00 JST 🌙
 
-  US/Eastern           | 2025-06-21 10:15:45 EDT (-0400) 🌅
-                       | (13 hours behind)
-  US/Central           | 2025-06-21 09:15:45 CDT (-0500) 🌅
-                       | (14 hours behind)
-  US/Mountain          | 2025-06-21 08:15:45 MDT (-0600) 🌅
-                       | (15 hours behind)
-  US/Pacific           | 2025-06-21 07:15:45 PDT (-0700) 🌅
-                       | (16 hours behind)
-  Europe/London        | 2025-06-21 15:15:45 BST (+0100) ☀️
-                       | (8 hours behind)
-  Europe/Paris         | 2025-06-21 16:15:45 CEST (+0200) ☀️
-                       | (7 hours behind)
-  Asia/Shanghai        | 2025-06-21 22:15:45 CST (+0800) 🌙
-                       | (1 hour behind)
-  Australia/Sydney     | 2025-06-22 01:15:45 AEST (+1000) 🌙
-                       | (1 hour ahead)
-  UTC                  | 2025-06-21 14:15:45 UTC (+0000) ☀️
-                       | (9 hours behind)
-======================================================================
-💡 Tip: You can use shortcuts like 'nyc', 'london', 'tokyo' for quick timezone lookups!
+🕐 Option 2: Monday, 2025-06-23
+--------------------------------------------------
+  📍 nyc             | 09:00 EST 🌅
+  📍 london          | 14:00 GMT ☀️
+  📍 tokyo           | 23:00 JST 🌙
+
+💡 Tip: These times work within standard business hours for all locations!
 ======================================================================
 
-------------------------------------------------------------
-💡 Next: Enter another location, type 'history' for recent searches, or 'quit' to exit
-------------------------------------------------------------
+Enter location (or command): overlap nyc london
 
-Enter location (or command): history
+🕐 Analyzing business hours overlap for: nyc, london
 
-📝 Recent Searches:
-----------------------------------------
-1. New York City, New York
-2. Tokyo, Japan
-
-💡 Tip: Type a number (1-2) to repeat that search
-Or enter a new location to search.
-
-Enter location (or command): 1
-🔄 Repeating search for: New York City, New York
-
-Processing...
-Looking up location: New York City, New York
-Found: City of New York, New York, United States
-Timezone: America/New_York
-
+🕐 BUSINESS HOURS OVERLAP ANALYSIS
 ======================================================================
-🌍 TIMEZONE INFORMATION
-======================================================================
-📍 Location: City of New York, New York, United States
-📌 Coordinates: 40.7127, -74.0060
-🕐 Local Timezone: America/New_York
+📍 Locations: nyc, london
+⏰ Business Hours: 9:00-17:00 (local time)
+✅ Overlap Found: 3 hours per day
 
-⏰ CURRENT TIME CONVERSIONS:
-----------------------------------------------------------------------
-⭐ America/New_York     | 2025-06-21 10:16:12 EDT (-0400) 🌅
-                        | LOCAL TIME
+🌍 OVERLAPPING BUSINESS HOURS:
+--------------------------------------------------
+UTC 14:00 - 15:00
+  📍 nyc             | 09:00 EST ✅
+  📍 london          | 14:00 GMT ✅
 
-  US/Eastern           | 2025-06-21 10:16:12 EDT (-0400) 🌅
-                       | (same time)
-  [... other timezones shown ...]
+UTC 15:00 - 16:00  
+  📍 nyc             | 10:00 EST ✅
+  📍 london          | 15:00 GMT ✅
+
+UTC 16:00 - 17:00
+  📍 nyc             | 11:00 EST ✅
+  📍 london           | 16:00 GMT ✅
+
+💡 Recommendation: 👍 Good overlap! Schedule important meetings during these hours.
 ======================================================================
+
+Enter location (or command): export json
+✅ Results exported to: timezone_results_20250621_160530.json
+
+Enter location (or command): help
+
+📖 DETAILED COMMAND HELP
+======================================================================
+🌍 BASIC LOCATION LOOKUP:
+  • Type any location: 'New York', 'Paris, France', 'Tokyo, Japan'
+  • Use shortcuts: 'nyc', 'london', 'tokyo', 'chicago', 'la', etc.
+
+⏰ TIME CONVERSION:
+  • convert [time] [timezone] [date] - Convert specific time
+    Examples:
+      'convert 14:30 EST' - Convert 2:30 PM EST to all timezones
+      'convert 9:00 AM PST 2025-07-04' - With specific date
+      'convert 15:45 UTC' - Convert UTC time
+
+🗓️ MEETING PLANNING:
+  • meeting [location1] [location2] ... - Find optimal meeting times
+    Examples:
+      'meeting nyc london tokyo' - 3-way meeting
+      'meeting New York London' - 2-way meeting
+
+🕐 BUSINESS HOURS OVERLAP:
+  • overlap [location1] [location2] ... - Analyze working hours overlap
+    Examples:
+      'overlap nyc london sydney' - Check overlap
+      'overlap EST PST' - US coast overlap
+
+📋 HISTORY & EXPORT:
+  • history - Show recent searches
+  • 1, 2, 3... - Repeat numbered search from history
+  • export txt - Export last result as text file
+  • export json - Export last result as JSON file
+
+🎯 TIMEZONE SHORTCUTS:
+  nyc/ny/east → US/Eastern    |  london/uk → Europe/London
+  chicago/central → US/Central|  paris → Europe/Paris
+  denver/mountain → US/Mountain| tokyo/japan → Asia/Tokyo
+  la/west/pacific → US/Pacific|  sydney/australia → Australia/Sydney
+  beijing/china → Asia/Shanghai| utc/gmt → UTC
+======================================================================
+💡 Tip: Commands are case-insensitive and flexible!
 
 Enter location (or command): quit
 Thanks for using PyTZ Buddy! 🌍
