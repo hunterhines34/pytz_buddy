@@ -6,6 +6,7 @@ A simple Python application that helps you find timezone information for any loc
 
 - 🔍 **Location Lookup**: Enter any location (city, state, country) and get its timezone
 - 🕐 **Time Conversion**: Automatically converts current time to major world timezones
+- 📝 **Search History**: Keep track of recent searches and quickly repeat them
 - 🆓 **Free APIs**: Uses only free services (OpenStreetMap Nominatim for geocoding)
 - 🎯 **Simple Interface**: Clean command-line interface that's easy to use
 
@@ -43,6 +44,12 @@ The app will show:
 - Local timezone information
 - Current time in that timezone
 - Converted times for major world timezones
+
+### History Commands
+
+- Type `history` to see your recent searches (up to 10)
+- Type a number (e.g., `1`, `2`) to repeat a previous search
+- Recent searches are automatically saved when successful
 
 ## Example Output
 
