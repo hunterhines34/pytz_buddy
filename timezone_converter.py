@@ -221,15 +221,16 @@ class TimezoneConverter:
                 break
         
         print()
-        # Display other timezones with relative differences
+        # Display other timezones with relative differences - improved alignment
         for tz_name, time_info in results['conversions'].items():
             if not time_info['is_source']:
                 dt_obj = time_info['datetime_obj']
                 day_indicator = "🌅" if 6 <= dt_obj.hour < 12 else "☀️" if 12 <= dt_obj.hour < 18 else "🌆" if 18 <= dt_obj.hour < 22 else "🌙"
                 print(f"  {tz_name:20} | {time_info['time']} ({time_info['utc_offset']}) {day_indicator}")
-                print(f"   {'':20} | {time_info['relative_diff']}")
+                print(f"  {'':20} | ({time_info['relative_diff']})")
         
         print("="*70)
         print("💡 Tip: You can use shortcuts like 'nyc', 'london', 'tokyo' for quick timezone lookups!")
         print("="*70)
+
 
