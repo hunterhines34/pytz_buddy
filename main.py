@@ -16,7 +16,14 @@ def main():
     print("🌍 Welcome to PyTZ Buddy - Timezone Converter!")
     print("Enter a location to see its timezone and conversions to major world timezones.")
     print("Examples: 'Duncan, Oklahoma', 'Paris, France', 'Tokyo, Japan'")
-    print("Commands: 'history' to see recent searches, 'quit' to exit.\n")
+    print()
+    print("📋 Available Commands:")
+    print("  • Enter any location name (city, state, country)")
+    print("  • 'history' - View your recent searches")
+    print("  • '1', '2', etc. - Repeat a search from history")
+    print("  • 'quit', 'exit', or 'q' - Exit the program")
+    print("  • Ctrl+C - Quick exit")
+    print()
     
     converter = TimezoneConverter()
     search_history = []  # Store recent searches
@@ -39,7 +46,7 @@ def main():
                 print("-" * 40)
                 for i, hist_location in enumerate(search_history, 1):
                     print(f"{i}. {hist_location}")
-                print("\nTo repeat a search, enter its number (e.g., '1')")
+                print("\n💡 Tip: Type a number (1-{}) to repeat that search".format(len(search_history)))
                 print("Or enter a new location to search.\n")
                 continue
             
@@ -73,7 +80,10 @@ def main():
                 print("❌ Could not find timezone information for that location.")
                 print("Please try a different location or be more specific.\n")
                 
-            print("\n" + "-"*60 + "\n")
+            # Show helpful commands after each search
+            print("\n" + "-"*60)
+            print("💡 Next: Enter another location, type 'history' for recent searches, or 'quit' to exit")
+            print("-"*60 + "\n")
             
         except KeyboardInterrupt:
             print("\n\nThanks for using PyTZ Buddy! 🌍")
@@ -81,6 +91,7 @@ def main():
         except Exception as e:
             print(f"❌ An error occurred: {e}")
             print("Please try again.\n")
+
 
 
 if __name__ == "__main__":
