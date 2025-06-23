@@ -24,6 +24,7 @@ def main():
     print("  • 'convert [time] [timezone]' - Convert specific time (e.g., 'convert 14:30 EST')")
     print("  • 'meeting [location1] [location2] ...' - Find meeting times")
     print("  • 'overlap [location1] [location2] ...' - Business hours overlap")
+    print("  • 'config [setting] [value]' - Configure preferences")
     print("  • 'history' - View your recent searches")
     print("  • 'export [format]' - Export last result (txt/json)")
     print("  • 'help' - Show detailed command help")
@@ -81,6 +82,13 @@ def main():
                 print("  • export txt - Export last result as text file")
                 print("  • export json - Export last result as JSON file")
                 print()
+                print("⚙️ CONFIGURATION:")
+                print("  • config - Show current settings")
+                print("  • config business_hours [start] [end] - Set business hours (e.g., 'config business_hours 8 18')")
+                print("  • config time_format [12h/24h] - Set time format (e.g., 'config time_format 12h')")
+                print("  • config export_format [txt/json] - Set default export format")
+                print("  • config reset - Reset all settings to defaults")
+                print()
                 print("🎯 TIMEZONE SHORTCUTS:")
                 print("  nyc/ny/east → US/Eastern    |  london/uk → Europe/London")
                 print("  chicago/central → US/Central|  paris → Europe/Paris")
@@ -115,7 +123,7 @@ def main():
                     continue
                 
                 parts = location.split()
-                export_format = 'txt'
+                export_format = None  # Use user's default
                 if len(parts) > 1:
                     export_format = parts[1].lower()
                     if export_format not in ['txt', 'json']:
@@ -137,6 +145,76 @@ def main():
                     print(f"{i}. {hist_location}")
                 print(f"\n💡 Tip: Type a number (1-{len(search_history)}) to repeat that search")
                 print("Or enter a new location to search.\n")
+                continue
+            
+            # Handle config command
+            if location.lower().startswith('config'):
+                parts = location.split()
+                if len(parts) == 1:
+                    # Show current configuration
+                    config = cache_manager.get_user_config()
+                    print("\n⚙️ CURRENT CONFIGURATION")
+                    print("="*50)
+                    print(f"📅 Business Hours: {config['business_hours']['start']}:00 - {config['business_hours']['end']}:00")
+                    print(f"🕐 Time Format: {config['time_format']}")
+                    print(f"📄 Export Format: {config['export_format']}")
+                    print(f"🌍 Preferred Timezones: {', '.join(config['preferred_timezones'][:5])}{'...' if len(config['preferred_timezones']) > 5 else ''}")
+                    print("="*50)
+                    print("💡 Use 'config [setting] [value]' to change settings")
+                    print("   Examples: 'config business_hours 8 18', 'config time_format 12h'")
+                    print()
+                elif len(parts) >= 2:
+                    setting = parts[1].lower()
+                    if setting == 'business_hours' and len(parts) == 4:
+                        try:
+                            start_hour = int(parts[2])
+                            end_hour = int(parts[3])
+                            if 0 <= start_hour < end_hour <= 24:
+                                success = cache_manager.update_user_config('business_hours', {'start': start_hour, 'end': end_hour})
+                                if success:
+                                    print(f"✅ Business hours updated to {start_hour}:00 - {end_hour}:00")
+                                else:
+                                    print("❌ Failed to update configuration")
+                            else:
+                                print("❌ Invalid hours. Start must be less than end, both between 0-24")
+                        except ValueError:
+                            print("❌ Invalid hour format. Use numbers (e.g., 'config business_hours 8 18')")
+                    elif setting == 'time_format' and len(parts) == 3:
+                        time_format = parts[2].lower()
+                        if time_format in ['12h', '24h']:
+                            success = cache_manager.update_user_config('time_format', time_format)
+                            if success:
+                                print(f"✅ Time format updated to {time_format}")
+                            else:
+                                print("❌ Failed to update configuration")
+                        else:
+                            print("❌ Invalid time format. Use '12h' or '24h'")
+                    elif setting == 'export_format' and len(parts) == 3:
+                        export_format = parts[2].lower()
+                        if export_format in ['txt', 'json']:
+                            success = cache_manager.update_user_config('export_format', export_format)
+                            if success:
+                                print(f"✅ Default export format updated to {export_format}")
+                            else:
+                                print("❌ Failed to update configuration")
+                        else:
+                            print("❌ Invalid export format. Use 'txt' or 'json'")
+                    elif setting == 'reset':
+                        # Reset configuration by deleting the config file
+                        import os
+                        config_file = os.path.join(cache_manager.cache_dir, "user_config.json")
+                        try:
+                            if os.path.exists(config_file):
+                                os.remove(config_file)
+                            print("✅ Configuration reset to defaults")
+                        except:
+                            print("❌ Failed to reset configuration")
+                    else:
+                        print("❌ Invalid config command. Use 'config' to see current settings")
+                        print("   or 'help' for detailed configuration examples")
+                else:
+                    print("❌ Invalid config command. Use 'config' to see current settings")
+                print()
                 continue
             
             # Handle history number selection

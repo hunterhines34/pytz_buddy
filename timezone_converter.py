@@ -23,8 +23,9 @@ class TimezoneConverter:
             else:
                 self.cache_manager = cache_manager
             
-            # Major timezones to display
-            self.major_timezones = [
+            # Load user configuration and use preferred timezones
+            user_config = self.cache_manager.get_user_config()
+            self.major_timezones = user_config.get('preferred_timezones', [
                 'US/Eastern',
                 'US/Central', 
                 'US/Mountain',
@@ -35,7 +36,10 @@ class TimezoneConverter:
                 'Asia/Shanghai',
                 'Australia/Sydney',
                 'UTC'
-            ]
+            ])
+            
+            # Store user config for use in other methods
+            self.user_config = user_config
             
             # Popular timezone shortcuts for quick access
             self.timezone_shortcuts = {
@@ -81,87 +85,94 @@ class TimezoneConverter:
         else:
             return f"{abs(diff_hours)} hour{'s' if abs(diff_hours) != 1 else ''} behind"
     
-    def find_meeting_times(self, locations, start_hour=8, end_hour=18, duration_hours=1):
-            """Find optimal meeting times across multiple locations during business hours"""
-            if len(locations) < 2:
-                return None
-                
-            # Process all locations to get timezone info
-            location_timezones = []
-            for location in locations:
-                if location.lower() in self.timezone_shortcuts:
-                    tz_str = self.timezone_shortcuts[location.lower()]
-                    location_data = {
-                        'input': location,
-                        'address': f"Timezone: {tz_str}",
-                        'timezone': tz_str
-                    }
-                else:
-                    location_info = self.get_location_info(location)
-                    if not location_info:
-                        continue
-                    timezone_str = self.get_timezone_for_coordinates(
-                        location_info['latitude'], 
-                        location_info['longitude']
-                    )
-                    if not timezone_str:
-                        continue
-                    location_data = {
-                        'input': location,
-                        'address': location_info['address'],
-                        'timezone': timezone_str
-                    }
-                location_timezones.append(location_data)
+    def find_meeting_times(self, locations, start_hour=None, end_hour=None, duration_hours=1):
+        """Find optimal meeting times across multiple locations during business hours"""
+        # Use user configuration for business hours if not specified
+        if start_hour is None or end_hour is None:
+            business_hours = self.user_config.get('business_hours', {'start': 8, 'end': 18})
+            start_hour = business_hours.get('start', 8)
+            end_hour = business_hours.get('end', 18)
             
-            if len(location_timezones) < 2:
-                return None
-                
-            # Find overlapping business hours
-            meeting_suggestions = []
+        if len(locations) < 2:
+            return None
             
-            # Check next 7 days for meeting opportunities
-            from datetime import datetime, timedelta
-            today = datetime.now().date()
+        # Process all locations to get timezone info
+        location_timezones = []
+        for location in locations:
+            if location.lower() in self.timezone_shortcuts:
+                tz_str = self.timezone_shortcuts[location.lower()]
+                location_data = {
+                    'input': location,
+                    'address': f"Timezone: {tz_str}",
+                    'timezone': tz_str
+                }
+            else:
+                location_info = self.get_location_info(location)
+                if not location_info:
+                    continue
+                timezone_str = self.get_timezone_for_coordinates(
+                    location_info['latitude'], 
+                    location_info['longitude']
+                )
+                if not timezone_str:
+                    continue
+                location_data = {
+                    'input': location,
+                    'address': location_info['address'],
+                    'timezone': timezone_str
+                }
+            location_timezones.append(location_data)
+        
+        if len(location_timezones) < 2:
+            return None
             
-            for day_offset in range(7):
-                check_date = today + timedelta(days=day_offset)
+        # Find overlapping business hours
+        meeting_suggestions = []
+        
+        # Check next 7 days for meeting opportunities
+        from datetime import datetime, timedelta
+        today = datetime.now().date()
+        
+        for day_offset in range(7):
+            check_date = today + timedelta(days=day_offset)
+            
+            # For each hour in the day, check if it's business hours for all locations
+            for hour in range(24):
+                meeting_time = datetime.combine(check_date, datetime.min.time().replace(hour=hour))
                 
-                # For each hour in the day, check if it's business hours for all locations
-                for hour in range(24):
-                    meeting_time = datetime.combine(check_date, datetime.min.time().replace(hour=hour))
-                    
-                    valid_for_all = True
-                    time_details = []
-                    
-                    for location_data in location_timezones:
-                        try:
-                            tz = pytz.timezone(location_data['timezone'])
-                            # Convert meeting time to this timezone
-                            utc_time = pytz.utc.localize(meeting_time)
-                            local_time = utc_time.astimezone(tz)
-                            
-                            # Check if it's within business hours
-                            if not (start_hour <= local_time.hour < end_hour):
-                                valid_for_all = False
-                                break
-                                
-                            time_details.append({
-                                'location': location_data['input'],
-                                'address': location_data['address'],
-                                'local_time': local_time,
-                                'timezone': location_data['timezone']
-                            })
-                        except Exception:
+                valid_for_all = True
+                time_details = []
+                
+                for location_data in location_timezones:
+                    try:
+                        tz = pytz.timezone(location_data['timezone'])
+                        # Convert meeting time to this timezone
+                        utc_time = pytz.utc.localize(meeting_time)
+                        local_time = utc_time.astimezone(tz)
+                        
+                        # Check if it's within business hours
+                        if not (start_hour <= local_time.hour < end_hour):
                             valid_for_all = False
                             break
-                    
-                    if valid_for_all and len(time_details) == len(location_timezones):
-                        meeting_suggestions.append({
-                            'utc_time': meeting_time,
-                            'locations': time_details
+                            
+                        time_details.append({
+                            'location': location_data['input'],
+                            'address': location_data['address'],
+                            'local_time': local_time,
+                            'timezone': location_data['timezone']
                         })
-            
-            return meeting_suggestions[:10]  # Return top 10 suggestions
+                    except Exception:
+                        valid_for_all = False
+                        break
+                
+                if valid_for_all and len(time_details) == len(location_timezones):
+                    meeting_suggestions.append({
+                        'utc_time': meeting_time,
+                        'locations': time_details
+                    })
+        
+        return meeting_suggestions[:10]  # Return top 10 suggestions
+  # Return top 10 suggestions
         
     def display_meeting_suggestions(self, suggestions, locations):
             """Display meeting time suggestions in a formatted way"""
@@ -448,8 +459,14 @@ class TimezoneConverter:
             
             print("="*70)
         
-    def calculate_business_hours_overlap(self, locations, start_hour=9, end_hour=17):
+    def calculate_business_hours_overlap(self, locations, start_hour=None, end_hour=None):
         """Calculate overlapping business hours between multiple locations"""
+        # Use user configuration for business hours if not specified
+        if start_hour is None or end_hour is None:
+            business_hours = self.user_config.get('business_hours', {'start': 9, 'end': 17})
+            start_hour = business_hours.get('start', 9)
+            end_hour = business_hours.get('end', 17)
+            
         if len(locations) < 2:
             return None
             
@@ -578,10 +595,14 @@ class TimezoneConverter:
                 print(f"💡 Recommendation: {recommendation}")
                 print("="*70)
             
-    def export_results(self, results, export_format='txt', filename=None):
+    def export_results(self, results, export_format=None, filename=None):
         """Export timezone conversion results to file"""
         if not results:
             return False, "No results to export"
+            
+        # Use user configuration for default export format if not specified
+        if export_format is None:
+            export_format = self.user_config.get('export_format', 'txt')
             
         try:
             import json
